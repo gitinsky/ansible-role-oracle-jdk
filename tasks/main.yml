@@ -1,0 +1,6 @@
+---
+- name: download Oracle JDK
+  command: bash -c "cd /root && wget http://ns2.1888.spb.ru/jdk-7u71-linux-x64.rpm" creates=/root/jdk-7u71-linux-x64.rpm
+
+- name: install Oracle JDK
+  yum: name=/root/jdk-7u71-linux-x64.rpm state=present
