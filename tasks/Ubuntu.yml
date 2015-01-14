@@ -1,0 +1,34 @@
+---
+- name: install alien
+  apt: name=alien state=present
+
+- name: download JDK
+  command: bash -c "cd /root && wget http://ns2.1888.spb.ru/jdk_1.7.065-1_amd64.deb" creates=/root/jdk_1.7.065-1_amd64.deb
+
+- name: download JDK 8
+  command: bash -c "cd /root && wget http://ns2.1888.spb.ru/jdk_1.8.011-1_amd64.deb" creates=/root/jdk_1.8.011-1_amd64.deb
+
+- shell: bash -c "dpkg -l jdk 2>&1; true"
+  register: jdk
+
+- name: install JDK
+  command: dpkg -i /root/jdk_1.8.011-1_amd64.deb
+  when: jdk.stdout.find('1.8.011-1') == -1
+
+- name: unpack tools for JDK 8
+  command: bash -c "cd /usr/java/jdk1.8.0_11/lib && /usr/java/jdk1.8.0_11/bin/unpack200 tools.pack tools.jar" creates=/usr/java/jdk1.8.0_11/lib/tools.jar
+
+- name: unpack rt for JDK 8
+  command: bash -c "cd /usr/java/jdk1.8.0_11/jre/lib && /usr/java/jdk1.8.0_11/bin/unpack200 rt.pack rt.jar" creates=/usr/java/jdk1.8.0_11/jre/lib/rt.jar
+
+- name: unpack jfxrt for JDK 8
+  command: bash -c "cd /usr/java/jdk1.8.0_11/jre/lib/ext && /usr/java/jdk1.8.0_11/bin/unpack200 jfxrt.pack jfxrt.jar" creates=/usr/java/jdk1.8.0_11/jre/lib/ext/jfxrt.jar
+
+- name: unpack jsse for JDK 8
+  command: bash -c "cd /usr/java/jdk1.8.0_11/jre/lib && /usr/java/jdk1.8.0_11/bin/unpack200 jsse.pack jsse.jar" creates=/usr/java/jdk1.8.0_11/jre/lib/jsse.jar
+
+- name: unpack charsets for JDK 8
+  command: bash -c "cd /usr/java/jdk1.8.0_11/jre/lib && /usr/java/jdk1.8.0_11/bin/unpack200 charsets.pack charsets.jar" creates=/usr/java/jdk1.8.0_11/jre/lib/charsets.jar
+
+- name: unpack localedata for JDK 8
+  command: bash -c "cd /usr/java/jdk1.8.0_11/jre/lib/ext && /usr/java/jdk1.8.0_11/bin/unpack200 localedata.pack localedata.jar" creates=/usr/java/jdk1.8.0_11/jre/lib/ext/localedata.jar

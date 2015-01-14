@@ -1,6 +1,11 @@
 ---
 - name: download Oracle JDK
   command: bash -c "cd /root && wget http://ns2.1888.spb.ru/jdk-7u71-linux-x64.rpm" creates=/root/jdk-7u71-linux-x64.rpm
+  when: ansible_os_family == 'RedHat'
 
 - name: install Oracle JDK
   yum: name=/root/jdk-7u71-linux-x64.rpm state=present
+  when: ansible_os_family == 'RedHat'
+
+- include: Ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
