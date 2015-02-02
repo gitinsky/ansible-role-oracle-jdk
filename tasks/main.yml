@@ -7,5 +7,5 @@
   yum: name=/root/jdk-7u71-linux-x64.rpm state=present
   when: ansible_os_family == 'RedHat'
 
-- include: Ubuntu.yml
-  when: ansible_distribution == "Ubuntu"
+- include: Debian.yml
+  when: ansible_os_family == 'Debian'

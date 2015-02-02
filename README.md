@@ -1,0 +1,1 @@
+Tested on redhat and ubuntu 12.04, ansible 1.8.1
