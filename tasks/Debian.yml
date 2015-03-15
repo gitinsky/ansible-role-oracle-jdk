@@ -36,3 +36,6 @@
 
 - name: unpack localedata for JDK 8
   command: bash -c "cd /usr/java/jdk1.8.0_11/jre/lib/ext && /usr/java/jdk1.8.0_11/bin/unpack200 localedata.pack localedata.jar" creates=/usr/java/jdk1.8.0_11/jre/lib/ext/localedata.jar
+
+- name: make a link to libjvm.so
+  file: state=link src=/usr/java/jdk1.8.0_11/jre/lib/amd64/server/libjvm.so dest=/lib/x86_64-linux-gnu/libjvm.so
