@@ -13,7 +13,7 @@
   command: bash -c "cd /root && wget http://ns2.1888.spb.ru/jdk-8u40-linux-x64.rpm" creates=/root/jdk-8u40-linux-x64.rpm
 
 - name: convert RPM to DEB
-  shell: cd /root && alien --to-deb /root/jdk-8u40-linux-x64.rpm
+  shell: cd /root && alien --to-deb /root/jdk-8u40-linux-x64.rpm creates=/root/jdk1.8.0-40_1.8.040-1_amd64.deb
 
 - shell: bash -c "dpkg -l | grep jdk 2>&1; true"
   register: jdk
