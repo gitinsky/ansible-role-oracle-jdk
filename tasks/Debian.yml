@@ -2,7 +2,7 @@
 - name: apt-get update
   apt: update_cache=yes
   ignore_errors: True
-    
+
 - name: install alien
   apt: name=alien state=present
 
@@ -29,16 +29,22 @@
   command: bash -c "cd /usr/java/jdk1.8.0_40/jre/lib && /usr/java/jdk1.8.0_40/bin/unpack200 rt.pack rt.jar" creates=/usr/java/jdk1.8.0_40/jre/lib/rt.jar
 
 - name: unpack jfxrt for JDK 8
-  command: bash -c "cd /usr/java/jdk1.8.0_40/jre/lib/ext && /usr/java/jdk1.8.0_40/bin/unpack200 jfxrt.pack jfxrt.jar" creates=/usr/java/jdk1.8.0_40/jre/lib/ext/jfxrt.jar
+  command: bash -c "cd /usr/java/jdk1.8.0_40/jre/lib/ext && /usr/java/jdk1.8.0_40/bin/unpack200 jfxrt.pack jfxrt.jar"
+  args:
+    creates: /usr/java/jdk1.8.0_40/jre/lib/ext/jfxrt.jar
 
 - name: unpack jsse for JDK 8
   command: bash -c "cd /usr/java/jdk1.8.0_40/jre/lib && /usr/java/jdk1.8.0_40/bin/unpack200 jsse.pack jsse.jar" creates=/usr/java/jdk1.8.0_40/jre/lib/jsse.jar
 
 - name: unpack charsets for JDK 8
-  command: bash -c "cd /usr/java/jdk1.8.0_40/jre/lib && /usr/java/jdk1.8.0_40/bin/unpack200 charsets.pack charsets.jar" creates=/usr/java/jdk1.8.0_40/jre/lib/charsets.jar
+  command: bash -c "cd /usr/java/jdk1.8.0_40/jre/lib && /usr/java/jdk1.8.0_40/bin/unpack200 charsets.pack charsets.jar"
+  args:
+    creates: /usr/java/jdk1.8.0_40/jre/lib/charsets.jar
 
 - name: unpack localedata for JDK 8
-  command: bash -c "cd /usr/java/jdk1.8.0_40/jre/lib/ext && /usr/java/jdk1.8.0_40/bin/unpack200 localedata.pack localedata.jar" creates=/usr/java/jdk1.8.0_40/jre/lib/ext/localedata.jar
+  command: bash -c "cd /usr/java/jdk1.8.0_40/jre/lib/ext && /usr/java/jdk1.8.0_40/bin/unpack200 localedata.pack localedata.jar"
+  args:
+    creates: /usr/java/jdk1.8.0_40/jre/lib/ext/localedata.jar
 
 - name: make a link to libjvm.so
   file: state=link src=/usr/java/jdk1.8.0_40/jre/lib/amd64/server/libjvm.so dest=/lib/x86_64-linux-gnu/libjvm.so
