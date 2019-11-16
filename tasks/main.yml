@@ -3,14 +3,14 @@
   yum: name=wget state=present
   when: ansible_os_family == 'RedHat'
 
-- name: download Oracle JDK
-  shell: "cd /root && wget --header 'Cookie: oraclelicense=accept-securebackup-cookie' http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.rpm"
+- name: download Zulu JDK
+  shell: "cd /root && wget https://cdn.azul.com/zulu/bin/zulu8.42.0.23-ca-jdk8.0.232-linux.x86_64.rpm"
   args:
-     creates: /root/jdk-8u131-linux-x64.rpm
+     creates: /root/zulu8.42.0.23-ca-jdk8.0.232-linux.x86_64.rpm
   when: ansible_os_family == 'RedHat'
 
-- name: install Oracle JDK
-  yum: name=/root/jdk-8u131-linux-x64.rpm state=present
+- name: install Zulu JDK
+  yum: name=/root/zulu8.42.0.23-ca-jdk8.0.232-linux.x86_64.rpm state=present
   when: ansible_os_family == 'RedHat'
 
 - include_tasks: Debian.yml
